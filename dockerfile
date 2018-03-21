@@ -1,11 +1,12 @@
 FROM microsoft/azure-cli:latest
 
-ENV TERRAFORM_VERSION=0.10.0
-ENV TERRAFORM_SHA256SUM=f991039e3822f10d6e05eabf77c9f31f3831149b52ed030775b6ec5195380999
-ENV CMD=
+ENV TERRAFORM_VERSION=0.11.4
+ENV TERRAFORM_SHA256SUM=817be651ca41b999c09250a9fcade541a941afab41c0c663bd25529a4d5cfd31
+ENV AZURE_CMD=
+ENV TERRAFORM_CMD=
 
-RUN apk add --update git curl openssh && \
-    curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip > terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+RUN apk add --update git curl curl-dev openssh
+RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip > terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     echo "${TERRAFORM_SHA256SUM}  terraform_${TERRAFORM_VERSION}_linux_amd64.zip" > terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     sha256sum -cs terraform_${TERRAFORM_VERSION}_SHA256SUMS && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin && \

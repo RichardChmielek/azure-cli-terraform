@@ -1,3 +1,3 @@
 #!/bin/bash
-az
-/bin/terraform $CMD
+az $AZURE_CMD
+/bin/terraform $TERRAFORM_CMD
